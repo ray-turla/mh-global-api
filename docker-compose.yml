@@ -1,0 +1,39 @@
+version: 3.9
+services:
+  mhg-api:
+    image: mhg-server
+    ports:
+      - 5000:5000
+    networks: mhg-app
+    depends_on:
+      - mongo1
+  mongo1:
+    container_name: mongo1
+    image: mongo
+    command: mongod --replSet mhg-mongo-set
+    ports:
+      - 30001: 27017
+    networks:
+      - mhg-app
+  mongo2:
+    container_name: mongo2
+    image: mongo
+    command: mongod --replSet mhg-mongo-set
+    ports:
+      - 30002: 27017
+    networks:
+      - mhg-app
+  mongo3:
+    container_name: mongo3
+    image: mongo
+    command: mongod --replSet mhg-mongo-set
+    ports:
+      - 30003: 27017
+    networks:
+      - mhg-app
+  networks:
+    mhg-app:
+      driver: bridge
+  volumes:
+    mongo-data:
+      driver: local

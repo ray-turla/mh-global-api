@@ -1,0 +1,61 @@
+{
+  "Game": {
+    "id": "GM000",
+    "name": "Monster Hunter Generations Ultimate",
+    "monsters": ["M000", "M001"],
+    "materials": ["MAT000", "MAT001"],
+    "items": ["I000", "I000"],
+    "combinations": ["C000", "C001"],
+    "locales": ["L000", "L001"],
+    "description": "This is monster hunter generations",
+    "created_at": "2023-01-01",
+    "updated_at": "2023-01-01"
+  },
+  "Monster": {
+    "id": "M000",
+    "name": "Mizutsune",
+    "species": "Wyvern",
+    "type": "Small Monster",
+    "materials": ["MAT000", "MAT001"],
+    "locales": ["L000", "L001"],
+    "description": "Bewitching Dance"
+  },
+  "Locale": {
+    "id": "L000",
+    "name": "Misty Peaks",
+    "areas": ["MP0", "MP1"]
+  },
+  "LocaleArea": {
+    "id": "MP1",
+    "materials": ["MAT000", "MAT001"],
+    "monsters": ["M000", "M001"]
+  },
+  "Item": {
+    "id": "I000",
+    "name": "Power Charm",
+    "description": "Attack up",
+    "category": "other",
+    "buyPrice": 1000,
+    "sellPrice": 120,
+    "combinations": ["C000", "C001"],
+    "acquire": "Buy after finishing village quest"
+  },
+  "Combination": {
+    "id": "C000",
+    "name": "Power Talon",
+    "category": "other",
+    "components": ["I000", "MAT000"]
+  },
+  "Weapon": {
+    "id": "W002",
+    "name": "Dual Dragon Ultimus",
+    "craftMaterials": [],
+    "upgradeMaterials": ["MAT000", "MAT001"],
+    "description": "Double Dragon Ultimate",
+    "upgradeTO": ["W004"],
+    "upgradeFrom": ["Double Dragon"],
+    "upgradePrice": 90000,
+    "buyPrice": 0,
+    "sellPrice": 10908
+  }
+}
