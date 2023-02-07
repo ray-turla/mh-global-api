@@ -1,39 +1,54 @@
-version: 3.9
+version: "3.9"
 services:
   mhg-api:
-    image: mhg-server
+    image: mhg-api-dev
+    restart: "no"
     ports:
       - 5000:5000
-    networks: mhg-app
+    networks: 
+      - mhg-sys
     depends_on:
       - mongo1
   mongo1:
     container_name: mongo1
+    restart: always
     image: mongo
-    command: mongod --replSet mhg-mongo-set
     ports:
-      - 30001: 27017
-    networks:
-      - mhg-app
+      - 30001:27017
+    volumes:
+      - mongodb1:/data/db
+    networks: 
+      - mhg-sys
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "mhg-mongo-set", "--bind_ip_all"]
   mongo2:
     container_name: mongo2
+    restart: always
     image: mongo
-    command: mongod --replSet mhg-mongo-set
     ports:
-      - 30002: 27017
+      - 30002:27017
+    volumes:
+      - mongodb2:/data/db
     networks:
-      - mhg-app
+      - mhg-sys
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "mhg-mongo-set", "--bind_ip_all"]
   mongo3:
     container_name: mongo3
+    restart: always
     image: mongo
-    command: mongod --replSet mhg-mongo-set
     ports:
-      - 30003: 27017
+      - 30003:27017
+    volumes:
+      - mongodb3:/data/db
     networks:
-      - mhg-app
-  networks:
-    mhg-app:
-      driver: bridge
-  volumes:
-    mongo-data:
-      driver: local
+      - mhg-sys
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "mhg-mongo-set", "--bind_ip_all"]
+networks:
+  mhg-sys:
+    driver: bridge
+volumes:
+  mongodb1:
+    driver: local
+  mongodb2:
+    driver: local
+  mongodb3:
+    driver: local
